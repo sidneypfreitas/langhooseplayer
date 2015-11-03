@@ -12,18 +12,24 @@
             <p>Seu nevegador não suporta o elemento audio.</p>
         </audio>
         <div id="painel">
-            <a id="backward" class="button">
-                <<
-            </a>
-            <a id="play" class="button" onclick="play(music)">
-                >||
-            </a>
-            <a id="stop" class="button" onclick="stop(music)">
-                [ ]
-            </a>
-            <a id="forward" class="button">
-                >>
-            </a>
+            <div id="buttons">
+                <a id="backward" class="button">
+                    <img src="images/rewind.png" />
+                </a>
+                <a id="play" class="button" onclick="play(music)">
+                    <img src="images/play.png" id="img-play"/>
+                </a>
+                <a id="stop" class="button" onclick="stop(music)">
+                    <img src="images/stop.png" />
+                </a>
+                <a id="forward" class="button">
+                    <img src="images/forward.png" />
+                </a>
+            </div>
+            <div id="current-music">
+                <h1 id="music-name">The Elevator Bossa Nova</h1>
+                <h2 id-"music-author">Bensound</h2>
+            </div>
 		</div>
     </body>
 

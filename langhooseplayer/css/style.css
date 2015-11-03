@@ -1,4 +1,54 @@
+*
+{
+	margin:0;
+	padding:0;
+	list-style:none;
+	vertical-align:baseline;
+}
+
+#painel
+{
+	background-color: #1f554d;
+	float: left;
+	padding-bottom: 10px;
+	padding-left: 40px;
+	padding-top: 10px;
+	width: 100%;
+}
+
+#buttons
+{
+	float: left;
+	padding-top: 15px;
+}
+
+#current-music
+{
+	float: left;
+	padding-left: 20%;
+}
+
 .button
 {
 	padding: 10px;
+	color: #ffffff;
+}
+
+h1
+{
+	color: #ffffff;
+	font-family: 'Raleway',sans-serif;
+	font-size: 20px;
+	font-weight: 800;
+	text-align: center;
+	text-transform: uppercase;
+}
+
+h2
+{
+	color: #ffffff;
+	font-family: 'Raleway',sans-serif;
+	font-size: 15px;
+	font-weight: 800;
+	text-align: center;
 }
