@@ -19,7 +19,6 @@ function play(audio)
 
 function stop(audio)
 {
-	audio.pause();
 	audio.load();
 	document.getElementById('img-play').src='images/play.png';
 }

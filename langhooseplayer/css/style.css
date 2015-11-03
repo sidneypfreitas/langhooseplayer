@@ -11,7 +11,6 @@
 	background-color: #1f554d;
 	float: left;
 	padding-bottom: 10px;
-	padding-left: 40px;
 	padding-top: 10px;
 	width: 100%;
 }
@@ -20,12 +19,23 @@
 {
 	float: left;
 	padding-top: 15px;
+	width: 19%;
+	text-align: center;
 }
 
 #current-music
 {
 	float: left;
-	padding-left: 20%;
+	text-align: center;
+	width: 60%;
+}
+
+#logo
+{
+	float: right;
+	padding-top: 5px;
+	text-align: center;
+	width: 19%;
 }
 
 .button
@@ -40,7 +50,6 @@ h1
 	font-family: 'Raleway',sans-serif;
 	font-size: 20px;
 	font-weight: 800;
-	text-align: center;
 	text-transform: uppercase;
 }
 
@@ -49,6 +58,4 @@ h2
 	color: #ffffff;
 	font-family: 'Raleway',sans-serif;
 	font-size: 15px;
-	font-weight: 800;
-	text-align: center;
 }
