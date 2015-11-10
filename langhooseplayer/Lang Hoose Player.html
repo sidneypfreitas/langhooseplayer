@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+
+    <head>
+        <meta charset="utf-8"/>
+        <script src="js/player.js"></script>
+        <link rel="stylesheet" type="text/css" href="css/style.css">
+    </head>
+
+    <body>
+        <audio src="music/bensound-theelevatorbossanova.mp3" id='music'>
+            <p>Seu nevegador não suporta o elemento audio.</p>
+        </audio>
+        <div id="painel">
+            <div id="buttons">
+                <a id="backward" class="button">
+                    <img src="images/rewind.png" />
+                </a>
+                <a id="play" class="button" onclick="play(music)">
+                    <img src="images/play.png" id="img-play"/>
+                </a>
+                <a id="stop" class="button" onclick="stop(music)">
+                    <img src="images/stop.png" />
+                </a>
+                <a id="forward" class="button">
+                    <img src="images/forward.png" />
+                </a>
+            </div>
+
+            <div id="current-music">
+                <h1 id="music-name">The Elevator Bossa Nova</h1>
+                <h2 id-"music-author">Bensound</h2>
+            </div>
+
+            <div id="logo">
+                <img src="images/hand.png" id="img-logo"/>
+            </div>
+		</div>
+    </body>
+
+</html>

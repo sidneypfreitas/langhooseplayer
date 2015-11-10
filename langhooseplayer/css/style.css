@@ -1,0 +1,61 @@
+*
+{
+	margin:0;
+	padding:0;
+	list-style:none;
+	vertical-align:baseline;
+}
+
+#painel
+{
+	background-color: #1f554d;
+	float: left;
+	padding-bottom: 10px;
+	padding-top: 10px;
+	width: 100%;
+}
+
+#buttons
+{
+	float: left;
+	padding-top: 15px;
+	width: 19%;
+	text-align: center;
+}
+
+#current-music
+{
+	float: left;
+	text-align: center;
+	width: 60%;
+}
+
+#logo
+{
+	float: right;
+	padding-top: 5px;
+	text-align: center;
+	width: 19%;
+}
+
+.button
+{
+	padding: 10px;
+	color: #ffffff;
+}
+
+h1
+{
+	color: #ffffff;
+	font-family: 'Raleway',sans-serif;
+	font-size: 20px;
+	font-weight: 800;
+	text-transform: uppercase;
+}
+
+h2
+{
+	color: #ffffff;
+	font-family: 'Raleway',sans-serif;
+	font-size: 15px;
+}
