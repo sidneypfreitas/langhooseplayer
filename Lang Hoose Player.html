@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+
+    <head>
+        <meta charset="utf-8"/>
+        <script src="js/player.js"></script>
+        <link rel="stylesheet" type="text/css" href="css/style.css">
+    </head>
+
+    <body>
+        <audio src="music/bensound-theelevatorbossanova.mp3" id='music'>
+            <p>Seu nevegador não suporta o elemento audio.</p>
+        </audio>
+        <div id="painel">
+            <div id="buttons">
+                <a id="backward" class="button">
+                    <img src="images/rewind.png" />
+                </a>
+                <a id="play" class="button" onclick="play(music)">
+                    <img src="images/play.png" id="img-play"/>
+                </a>
+                <a id="stop" class="button" onclick="stop(music)">
+                    <img src="images/stop.png" />
+                </a>
+                <a id="forward" class="button">
+                    <img src="images/forward.png" />
+                </a>
+            </div>
+
+            <div id="current-music">
+                <h1 id="music-name"></h1>
+            </div>
+
+            <div class="music-upload">
+                <label for="music-input">
+                    <img src="images/playlist.png"/>
+                </label>
+                <input id="music-input" type="file" multiple onchange="getMusic(this.files)"/>
+            </div>
+        </div>
+        <div id="playlist">
+            <ul id="music-list"></ul>
+        </div>
+    </body>
+</html>
