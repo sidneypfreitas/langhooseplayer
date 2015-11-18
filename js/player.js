@@ -1,6 +1,18 @@
-function backward(audio)
+var executionFileNameList = new Array();
+var executionUrlList  = new Array();
+var currentMusic  = new Array();
+
+function backward()
 {
-    audio.backward();
+    if(currentMusic != 0)
+	{
+		playFromList(executionFileNameList[currentMusic - 1], executionUrlList[currentMusic - 1]);
+	}
+	else
+	{
+		var listSize = executionFileNameList.length;
+		playFromList(executionFileNameList[listSize - 1], executionUrlList[listSize - 1]);
+	}
 }
 
 function play(audio)
@@ -25,24 +37,39 @@ function playFromList(fileName, url)
     audio.play();
     document.getElementById("music-name").innerHTML = fileName;
     document.getElementById('img-play').src='images/pause.png';
+
+	currentMusic = executionUrlList.indexOf(url);
 }
 
-function removeMusicFromList(fileName)
+function removeMusicFromList(fileName, url)
 {
 	var parent = document.getElementById("music-list");
 	var child = document.getElementById(fileName);
 	parent.removeChild(child);
+
+	var currentMusic = document.getElementById("music").src;
+	if(url == currentMusic)
+	{
+		var audio = document.getElementById("music");
+		audio.pause();
+		document.getElementById("music").src = "";
+		document.getElementById('img-play').src = 'images/play.png';
+		document.getElementById("music-name").innerHTML = "";
+	}
 }
 
 function stop(audio)
 {
     audio.load();
-    document.getElementById('img-play').src='images/play.png';
+    document.getElementById('img-play').src = 'images/play.png';
 }
 
-function forward(audio)
+function forward()
 {
-    audio.forward();
+	if((executionFileNameList.length -1) < currentMusic)
+	{
+		playFromList(executionFileNameList[currentMusic + 1], executionUrlList[currentMusic + 1]);
+	}
 }
 
 var inputElement = document.getElementById("input");
@@ -58,13 +85,19 @@ function getMusic(files) {
     }
 
     for (var i = 0; i < files.length; i++) {
-        var file = files[i];
+		var file = files[i];
 		var fileName = file.name;
         var objectUrl = URL.createObjectURL(file);
-        var play_img = "<img id=img-play-list src=images/dark-play.png />"
-		var remove_img = "<img onClick=\"removeMusicFromList('" + fileName.replace(/ /g,'') + "')\" id=img-remove-music src=images/remove.png />"
-        var methods = "playFromList('" + file.name + "','" + objectUrl + "')";
-        var list_item = "<li id=" + fileName.replace(/ /g,'') + "><a onClick=\""+ methods +"\">" + play_img + fileName + "</a>" + remove_img + "</li>";
+
+		var listCounter = executionFileNameList.length;
+		executionFileNameList[listCounter] = fileName;
+		executionUrlList[listCounter] = objectUrl;
+
+        var play_img = "<img id=img-play-list src=images/dark-play.png />";
+		var playMethod = "playFromList('" + file.name + "','" + objectUrl + "')";
+		var removeMethod = "removeMusicFromList('" + fileName.replace(/ /g,'') + "', '" + objectUrl + "')";
+		var remove_img = "<img onClick=\"" + removeMethod + "\" id=img-remove-music src=images/remove.png />";
+        var list_item = "<li id=" + fileName.replace(/ /g,'') + "><a onClick=\""+ playMethod +"\">" + play_img + fileName + "</a>" + remove_img + "</li>";
         document.getElementById("music-list").innerHTML += list_item;
     }
 }

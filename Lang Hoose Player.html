@@ -3,17 +3,18 @@
 
     <head>
         <meta charset="utf-8"/>
-        <script src="js/player.js"></script>
-        <link rel="stylesheet" type="text/css" href="css/style.css">
+		<link rel="stylesheet" type="text/css" href="css/style.css">
+
+		<script src="js/playlist.js"></script>
     </head>
 
-    <body>
-        <audio src="music/bensound-theelevatorbossanova.mp3" id='music'>
+    <body onload="showPlaylists()">
+        <audio id='music'>
             <p>Seu nevegador não suporta o elemento audio.</p>
         </audio>
         <div id="painel">
             <div id="buttons">
-                <a id="backward" class="button">
+                <a id="backward" class="button" onclick="backward()">
                     <img src="images/rewind.png" />
                 </a>
                 <a id="play" class="button" onclick="play(music)">
@@ -22,7 +23,7 @@
                 <a id="stop" class="button" onclick="stop(music)">
                     <img src="images/stop.png" />
                 </a>
-                <a id="forward" class="button">
+                <a id="forward" class="button" onclick="forward()">
                     <img src="images/forward.png" />
                 </a>
             </div>
@@ -35,7 +36,7 @@
                 <label for="music-input">
                     <img src="images/playlist.png"/>
                 </label>
-                <input id="music-input" type="file" multiple onchange="getMusic(this.files)"/>
+                <input id="music-input" type="file" multiple onclick="createPlaylist(this.files)"/>
             </div>
         </div>
         <div id="playlist">
@@ -43,3 +44,4 @@
         </div>
     </body>
 </html>
+<!--createPlaylist(this.files)-->
