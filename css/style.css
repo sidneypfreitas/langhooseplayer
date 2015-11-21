@@ -17,26 +17,24 @@
 
 #buttons
 {
+	border: solid 1px white;
 	float: left;
-	padding-top: 15px;
-	width: 19%;
+	padding-top: 13px;
 	text-align: center;
+	width: 25%;
 }
 
 #current-music
 {
+	border: solid 1px white;
 	float: left;
 	text-align: center;
-	width: 60%;
-	padding-top: 10px;
+	width: 55%;
 }
 
 #logo
 {
-	float: right;
-	padding-top: 5px;
-	text-align: center;
-	width: 19%;
+	padding-left: 10px
 }
 
 #img-playlist
@@ -65,6 +63,11 @@
 	margin-right: auto;
 	padding-left: 15px;
 	width: 50%;
+}
+
+#volume
+{
+	margin-left: 10px;
 }
 
 .button

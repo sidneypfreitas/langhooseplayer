@@ -1,103 +1,96 @@
-var executionFileNameList = new Array();
-var executionUrlList  = new Array();
-var currentMusic  = new Array();
-
 function backward()
 {
-    if(currentMusic != 0)
-	{
-		playFromList(executionFileNameList[currentMusic - 1], executionUrlList[currentMusic - 1]);
-	}
-	else
-	{
-		var listSize = executionFileNameList.length;
-		playFromList(executionFileNameList[listSize - 1], executionUrlList[listSize - 1]);
-	}
-}
+    var currentMusic = localStorage.getItem('currentMusic');
+    var currentPlaylist = localStorage.getItem('currentPlaylist');
 
-function play(audio)
-{
-    if (audio.paused)
+    var jsonPlaylists = JSON.parse(localStorage.getItem('playlists'));
+    var playlist = getPlaylist(jsonPlaylists.playlists, currentPlaylist);
+
+    var index = getMusicIndex(playlist.musics, currentMusic);
+
+    if(index == 0)
     {
-        document.getElementById('img-play').src='images/pause.png';
-        audio.play();
+        var length = playlist.musics.length;
+        var music = playlist.musics[length-1];
+        playFromList(music.name, music.url);
     }
     else
     {
-        document.getElementById('img-play').src='images/play.png';
-        audio.pause();
+        var music = playlist.musics[index - 1];
+        playFromList(music.name, music.url);
     }
 }
 
 function playFromList(fileName, url)
 {
     var audio = document.getElementById("music");
-    audio.pause();
     audio.src = url;
+	volume();
     audio.play();
-    document.getElementById("music-name").innerHTML = fileName;
+    document.getElementById("music-name").innerHTML = "Música: " + fileName.replace(".mp3", "") + "<img id=logo src=images/hand.png />";
     document.getElementById('img-play').src='images/pause.png';
 
-	currentMusic = executionUrlList.indexOf(url);
+    localStorage.setItem('currentMusic', fileName);
+
+    // "Lê" evento de encerramento da música e chama o método para tocar a próxima
+    audio.onended = function() {
+        forward();
+    };
 }
 
-function removeMusicFromList(fileName, url)
+function removeMusicFromList(fileName, url, playlistName)
 {
-	var parent = document.getElementById("music-list");
-	var child = document.getElementById(fileName);
-	parent.removeChild(child);
+    var jsonPlaylists = JSON.parse(localStorage.getItem('playlists'));
+    var playlist = getPlaylist(jsonPlaylists.playlists, playlistName);
+    removeMusic(fileName, playlist);
+    localStorage.setItem('playlists', JSON.stringify(jsonPlaylists));
 
-	var currentMusic = document.getElementById("music").src;
-	if(url == currentMusic)
-	{
-		var audio = document.getElementById("music");
-		audio.pause();
-		document.getElementById("music").src = "";
-		document.getElementById('img-play').src = 'images/play.png';
-		document.getElementById("music-name").innerHTML = "";
-	}
+    var currentMusicUrl = document.getElementById("music").src;
+    if(url == currentMusicUrl)
+    {
+        stop();
+        document.getElementById("music").src = "";
+    }
+
+    openPlaylist(playlist.name);
 }
 
-function stop(audio)
+function stop()
 {
+	var audio = document.getElementById("music");
+	audio.pause();
     audio.load();
+	document.getElementById("music-name").innerHTML = "LANG HOOSE PLAYER<img id=logo src=images/hand.png />";
     document.getElementById('img-play').src = 'images/play.png';
 }
 
 function forward()
 {
-	if((executionFileNameList.length -1) < currentMusic)
-	{
-		playFromList(executionFileNameList[currentMusic + 1], executionUrlList[currentMusic + 1]);
-	}
+    var currentMusic = localStorage.getItem('currentMusic');
+    var currentPlaylist = localStorage.getItem('currentPlaylist');
+
+    var jsonPlaylists = JSON.parse(localStorage.getItem('playlists'));
+    var playlist = getPlaylist(jsonPlaylists.playlists, currentPlaylist);
+
+    var index = getMusicIndex(playlist.musics, currentMusic);
+    var length = playlist.musics.length;
+
+    if(index == length-1)
+    {
+        var music = playlist.musics[0];
+        playFromList(music.name, music.url);
+    }
+    else
+    {
+        var music = playlist.musics[index + 1];
+        playFromList(music.name, music.url);
+    }
 }
 
-var inputElement = document.getElementById("input");
-inputElement.addEventListener("change", getMusic, false);
+function volume()
+{
+	var volume = document.getElementById("volume").value;
+	var audio = document.getElementById("music");
 
-function getMusic(files) {
-    var musicList = document.getElementById("music-list");
-    if(files.length > 0 && musicList.childNodes.length == 0)
-    {
-        document.getElementById("music-name").innerHTML = files[0].name;
-        var objectUrl = URL.createObjectURL(files[0]);
-        document.getElementById("music").src = objectUrl;
-    }
-
-    for (var i = 0; i < files.length; i++) {
-		var file = files[i];
-		var fileName = file.name;
-        var objectUrl = URL.createObjectURL(file);
-
-		var listCounter = executionFileNameList.length;
-		executionFileNameList[listCounter] = fileName;
-		executionUrlList[listCounter] = objectUrl;
-
-        var play_img = "<img id=img-play-list src=images/dark-play.png />";
-		var playMethod = "playFromList('" + file.name + "','" + objectUrl + "')";
-		var removeMethod = "removeMusicFromList('" + fileName.replace(/ /g,'') + "', '" + objectUrl + "')";
-		var remove_img = "<img onClick=\"" + removeMethod + "\" id=img-remove-music src=images/remove.png />";
-        var list_item = "<li id=" + fileName.replace(/ /g,'') + "><a onClick=\""+ playMethod +"\">" + play_img + fileName + "</a>" + remove_img + "</li>";
-        document.getElementById("music-list").innerHTML += list_item;
-    }
+	audio.volume = volume / 10;
 }

@@ -6,6 +6,7 @@
 		<link rel="stylesheet" type="text/css" href="css/style.css">
 
 		<script src="js/playlist.js"></script>
+		<script src="js/player.js"></script>
     </head>
 
     <body onload="showPlaylists()">
@@ -26,17 +27,18 @@
                 <a id="forward" class="button" onclick="forward()">
                     <img src="images/forward.png" />
                 </a>
+				<input type="range" id="volume" min="0" max="10" onchange="volume()" />
             </div>
 
             <div id="current-music">
-                <h1 id="music-name"></h1>
+                <h1 id="music-name">LANG HOOSE PLAYER<img id="logo" src="images/hand.png" /></h1>
             </div>
 
             <div class="music-upload">
                 <label for="music-input">
                     <img src="images/playlist.png"/>
                 </label>
-                <input id="music-input" type="file" multiple onclick="createPlaylist(this.files)"/>
+                <input id="music-input" type="file" multiple onchange="createPlaylist(this.files)"/>
             </div>
         </div>
         <div id="playlist">
