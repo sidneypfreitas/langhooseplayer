@@ -12,13 +12,16 @@ function showPlaylists()
 		var play_img = "<img id=img-play-list src=images/dark-play.png />";
 		var removeMethod = "removePlayList(" + playlist.number + ")";
         var playMethod = "openPlaylist(\"" + playlist.name + "\")";
-		var remove_img = "<img onClick=" + removeMethod + " id=img-remove-music src=images/remove.png />";
+		var remove_img = "<a><img onClick=" + removeMethod + " id=img-remove-music src=images/remove.png /></a>";
 		list_item += "<li>";
         list_item += "<a onClick='" + playMethod + "'>" + play_img + playlist.name + "</a>";
         list_item += remove_img + "</li>";
 	}
 
     visualList.innerHTML = list_item;
+
+    fireRandomIcon();
+    fireRepeatIcon();
 }
 
 function openPlaylist(playlistName)
@@ -36,7 +39,7 @@ function openPlaylist(playlistName)
         var play_img = "<img id=img-play-list src=images/dark-play.png />";
 		var playMethod = "playFromList('" + fileName + "','" + objectUrl + "')";
 		var removeMethod = "removeMusicFromList('" + fileName + "', '" + objectUrl + "', '" + playlist.name + "')";
-		var remove_img = "<img onClick=\"" + removeMethod + "\" id=img-remove-music src=images/remove.png />";
+		var remove_img = "<a><img onClick=\"" + removeMethod + "\" id=img-remove-music src=images/remove.png /></a>";
         var list_item = "<li><a onClick=\""+ playMethod +"\">" + play_img + fileName.replace(".mp3", "") + "</a>" + remove_img + "</li>";
         visualList.innerHTML += list_item;
     }
@@ -142,6 +145,32 @@ function getMusicIndex(list, musicName)
         {
             return i;
         }
+    }
+}
+
+function fireRandomIcon()
+{
+    var isRandom = localStorage.getItem('random');
+    if(isRandom == "true")
+    {
+        document.getElementById('random').src='images/randomOn.png';
+    }
+    else if (isRandom == "false")
+    {
+        document.getElementById('random').src='images/random.png';
+    }
+}
+
+function fireRepeatIcon()
+{
+    var isRepeat = localStorage.getItem('repeat');
+    if(isRepeat == "true")
+    {
+        document.getElementById('repeat').src='images/repeatOn.png';
+    }
+    else if (isRepeat == "false")
+    {
+        document.getElementById('repeat').src='images/repeat.png';
     }
 }
 

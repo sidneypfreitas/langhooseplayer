@@ -34,11 +34,13 @@
                 <h1 id="music-name">LANG HOOSE PLAYER<img id="logo" src="images/hand.png" /></h1>
             </div>
 
-            <div class="music-upload">
+            <div class="extras">
                 <label for="music-input">
-                    <img src="images/playlist.png"/>
+                    <a><img class="extra-controller" src="images/playlist.png"/></a>
                 </label>
                 <input id="music-input" type="file" multiple onchange="createPlaylist(this.files)"/>
+                <a><img class="extra-controller" id="random" src="images/random.png" onclick="randomize()" /></a>
+                <a><img class="extra-controller" id="repeat" src="images/repeat.png" onclick="repeatMusic()" /></a>
             </div>
         </div>
         <div id="playlist">
@@ -46,4 +48,3 @@
         </div>
     </body>
 </html>
-<!--createPlaylist(this.files)-->

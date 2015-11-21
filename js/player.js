@@ -7,16 +7,27 @@ function backward()
     var playlist = getPlaylist(jsonPlaylists.playlists, currentPlaylist);
 
     var index = getMusicIndex(playlist.musics, currentMusic);
+    var length = playlist.musics.length;
+    var isRandom = localStorage.getItem('random');
 
-    if(index == 0)
+    if(isRandom == "false")
     {
-        var length = playlist.musics.length;
-        var music = playlist.musics[length-1];
-        playFromList(music.name, music.url);
+        if(index == 0)
+        {
+            var length = playlist.musics.length;
+            var music = playlist.musics[length-1];
+            playFromList(music.name, music.url);
+        }
+        else
+        {
+            var music = playlist.musics[index - 1];
+            playFromList(music.name, music.url);
+        }
     }
     else
     {
-        var music = playlist.musics[index - 1];
+        var x = Math.floor((Math.random() * (length-1)));
+        var music = playlist.musics[x];
         playFromList(music.name, music.url);
     }
 }
@@ -34,7 +45,15 @@ function playFromList(fileName, url)
 
     // "Lê" evento de encerramento da música e chama o método para tocar a próxima
     audio.onended = function() {
-        forward();
+        var isRepeat = localStorage.getItem('repeat');
+        if(isRepeat == "true")
+        {
+            playFromList(fileName, url);
+        }
+        else if (isRepeat == "false")
+        {
+            forward();
+        }
     };
 }
 
@@ -74,15 +93,26 @@ function forward()
 
     var index = getMusicIndex(playlist.musics, currentMusic);
     var length = playlist.musics.length;
+    var isRandom = localStorage.getItem('random');
 
-    if(index == length-1)
+    if(isRandom == "false")
     {
-        var music = playlist.musics[0];
-        playFromList(music.name, music.url);
+
+        if(index == length-1)
+        {
+            var music = playlist.musics[0];
+            playFromList(music.name, music.url);
+        }
+        else
+        {
+            var music = playlist.musics[index + 1];
+            playFromList(music.name, music.url);
+        }
     }
     else
     {
-        var music = playlist.musics[index + 1];
+        var x = Math.floor((Math.random() * (length-1)));
+        var music = playlist.musics[x];
         playFromList(music.name, music.url);
     }
 }
@@ -93,4 +123,44 @@ function volume()
 	var audio = document.getElementById("music");
 
 	audio.volume = volume / 10;
+}
+
+function randomize()
+{
+    var isRandom = localStorage.getItem('random');
+    if(isRandom == null)
+    {
+        isRandom = false;
+    }
+
+    if(isRandom == true || isRandom == "true")
+    {
+        localStorage.setItem('random', false);
+        document.getElementById('random').src='images/random.png';
+    }
+    else if (isRandom == false || isRandom == "false")
+    {
+        localStorage.setItem('random', true);
+        document.getElementById('random').src='images/randomOn.png';
+    }
+}
+
+function repeatMusic()
+{
+    var isRepeat = localStorage.getItem('repeat');
+    if(isRepeat == null)
+    {
+        isRepeat = false;
+    }
+
+    if(isRepeat == true || isRepeat == "true")
+    {
+        localStorage.setItem('repeat', false);
+        document.getElementById('repeat').src='images/repeat.png';
+    }
+    else if (isRepeat == false || isRepeat == "false")
+    {
+        localStorage.setItem('repeat', true);
+        document.getElementById('repeat').src='images/repeatOn.png';
+    }
 }

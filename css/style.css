@@ -17,7 +17,6 @@
 
 #buttons
 {
-	border: solid 1px white;
 	float: left;
 	padding-top: 13px;
 	text-align: center;
@@ -26,7 +25,6 @@
 
 #current-music
 {
-	border: solid 1px white;
 	float: left;
 	text-align: center;
 	width: 55%;
@@ -62,7 +60,7 @@
 	margin-left: auto;
 	margin-right: auto;
 	padding-left: 15px;
-	width: 50%;
+	width: 40%;
 }
 
 #volume
@@ -76,14 +74,19 @@
 	color: #ffffff;
 }
 
-.music-upload > input
+.extras > input
 {
     display: none;
 }
 
-.music-upload
+.extras
 {
 	padding-top: 10px;
+}
+
+.extra-controller
+{
+	padding-left: 10px;
 }
 
 h1
@@ -100,4 +103,9 @@ li
 	color: #1f554d;
 	font-family: 'Raleway',sans-serif;
 	font-size: 15px;
+}
+
+a
+{
+	cursor: pointer; 
 }
