@@ -18,7 +18,7 @@
 #buttons
 {
 	float: left;
-	padding-top: 13px;
+	padding-top: 23px;
 	text-align: center;
 	width: 25%;
 }
@@ -27,7 +27,7 @@
 {
 	float: left;
 	text-align: center;
-	width: 55%;
+	width: 50%;
 }
 
 #logo
@@ -66,6 +66,28 @@
 #volume
 {
 	margin-left: 10px;
+	width: 30%;
+}
+
+#progress
+{
+	background: #1f554d;
+	border: 1px;
+	border-radius: 5px;
+	box-shadow: 0 2px 5px rgba(0, 0, 0, 0.25) inset;
+	color: white;
+	height: 2px;
+	width: 80%;
+}
+ 
+/* Firefox */
+#progress::-moz-progress-bar { 
+    background: white;   
+}
+ 
+/* Chrome */
+#progress::-webkit-progress-value {
+    background: white;
 }
 
 .button
@@ -81,12 +103,12 @@
 
 .extras
 {
-	padding-top: 10px;
+	padding-top: 20px;
 }
 
 .extra-controller
 {
-	padding-left: 10px;
+	padding-left: 15px;
 }
 
 h1
@@ -107,5 +129,5 @@ li
 
 a
 {
-	cursor: pointer; 
+	cursor: pointer;
 }

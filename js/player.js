@@ -44,17 +44,30 @@ function playFromList(fileName, url)
     localStorage.setItem('currentMusic', fileName);
 
     // "Lê" evento de encerramento da música e chama o método para tocar a próxima
-    audio.onended = function() {
-        var isRepeat = localStorage.getItem('repeat');
-        if(isRepeat == "true")
+    audio.onended =
+        function() {
+            var isRepeat = localStorage.getItem('repeat');
+            if(isRepeat == "true")
+            {
+				document.getElementById('progress').value = 0;
+                playFromList(fileName, url);
+            }
+            else if (isRepeat == "false")
+            {
+                forward();
+            }
+        };
+
+    // "Lê" evento timeupdate e atualiza barra progress
+    audio.addEventListener("timeupdate",
+        function()
         {
-            playFromList(fileName, url);
+            var currentTime = audio.currentTime;
+            var duration = audio.duration;
+            var progression = (100 * currentTime) / duration;
+            document.getElementById('progress').value = progression;
         }
-        else if (isRepeat == "false")
-        {
-            forward();
-        }
-    };
+    );
 }
 
 function removeMusicFromList(fileName, url, playlistName)
@@ -74,6 +87,21 @@ function removeMusicFromList(fileName, url, playlistName)
     openPlaylist(playlist.name);
 }
 
+function play()
+{
+    var audio = document.getElementById("music");
+    if(audio.paused)
+    {
+        audio.play();
+        document.getElementById('img-play').src='images/pause.png';
+    }
+    else
+    {
+        audio.pause();
+        document.getElementById('img-play').src='images/play.png';
+    }
+}
+
 function stop()
 {
 	var audio = document.getElementById("music");
@@ -81,6 +109,7 @@ function stop()
     audio.load();
 	document.getElementById("music-name").innerHTML = "LANG HOOSE PLAYER<img id=logo src=images/hand.png />";
     document.getElementById('img-play').src = 'images/play.png';
+    document.getElementById('progress').value = 0;
 }
 
 function forward()
