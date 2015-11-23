@@ -47,12 +47,12 @@ function playFromList(fileName, url)
     audio.onended =
         function() {
             var isRepeat = localStorage.getItem('repeat');
-            if(isRepeat == "true")
+            if(isRepeat == "true" || isRepeat == true)
             {
 				document.getElementById('progress').value = 0;
                 playFromList(fileName, url);
             }
-            else if (isRepeat == "false")
+            else if (isRepeat == "false" || isRepeat == false || isRepeat == "null" || isRepeat == null)
             {
                 forward();
             }
