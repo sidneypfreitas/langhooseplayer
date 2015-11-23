@@ -10,7 +10,7 @@ function backward()
     var length = playlist.musics.length;
     var isRandom = localStorage.getItem('random');
 
-    if(isRandom == "false")
+    if(isRandom == "false" || isRandom == false || isRandom == null || isRandom == "null")
     {
         if(index == 0)
         {
@@ -124,7 +124,7 @@ function forward()
     var length = playlist.musics.length;
     var isRandom = localStorage.getItem('random');
 
-    if(isRandom == "false")
+    if(isRandom == "false" || isRandom == false || isRandom == null || isRandom == "null")
     {
 
         if(index == length-1)
